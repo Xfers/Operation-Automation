@@ -1,2 +1,2 @@
 # Operation-Automation
-This is a automation platform helping people team managing people operations.
+This is an automation platform helping people team managing people operations.
