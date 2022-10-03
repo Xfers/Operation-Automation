@@ -11,7 +11,10 @@ class MessagesController < ApplicationController
       @message = Message.new(message_params)
       @message.save
 
+      client = Slack::Web::Client.new
+      client.chat_postMessage(channel: '#project-acw', text: @message.description, as_user: true)
       redirect_to action: :index
+
     end
 
     def show
@@ -35,6 +38,9 @@ class MessagesController < ApplicationController
 
       redirect_to action: :index
     end
+
+
+    
     private
 
     def message_params
