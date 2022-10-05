@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_02_090614) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_05_112558) do
   create_table "messages", force: :cascade do |t|
     t.text "name"
     t.text "description"
     t.text "department"
-    t.text "when_to_announce"
+    t.date "target_announce_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
