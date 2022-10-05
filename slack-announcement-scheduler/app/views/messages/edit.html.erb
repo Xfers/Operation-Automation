@@ -1,0 +1,9 @@
+<%= form_for @message, url: {controller: 'messages', action: 'update', id: @message} do |f|%>
+  <%= f.label :name, "Message Title" %>
+  <%= f.text_field :name %>
+
+  <p><%= f.label :description, "Message Content" %>
+  <%= f.text_area :description %></p>
+
+  <%= f.submit "Update" %>
+  <% end %>
