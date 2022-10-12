@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
-  get "welcome" => "welcome"
-  get "welcome/say_hello" => "welcome#say_hello"
-  get "index" => "messages"
-  
-  match ':controller(/:action(/:id(.:format)))', via: :all
+  namespace :api do 
+    namespace :v1 do
+      get "/messages" => "messages#index"
+      get "/messages/:id" => "messages#show"
+
+      post "/messages" => "messages#create"
+      patch "/messages/:id" => "messages#update"
+      delete "/messages/:id" => "messages#destory"
+    end
+  end
 end
