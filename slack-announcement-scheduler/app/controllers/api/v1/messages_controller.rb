@@ -1,11 +1,12 @@
-class MessagesController < ApplicationController
+class Api::V1::MessagesController < ApplicationController
+  skip_before_action :verify_authenticity_token
     def index
       @messages = Message.all
+      render json: {
+        data: @messages.map{ |message| 
+        {name: message.name, department: message.department, target_announce_date: message.target_announce_date, id: message.id }
+      }}
     end 
-    
-    def new
-      @message = Message.new
-    end
 
     def create 
       @message = Message.new(message_params)
@@ -13,16 +14,15 @@ class MessagesController < ApplicationController
 
       client = Slack::Web::Client.new
       client.chat_postMessage(channel: '#project-acw', text: @message.description, as_user: true)
-      redirect_to action: :index
+      render json: { message: "OK"}, status: :ok
 
     end
 
     def show
       @message = Message.find(params[:id])
-    end
-
-    def edit
-      @message = Message.find(params[:id])
+      render json: {
+        data: @message
+      }
     end
 
     def update 
@@ -44,6 +44,6 @@ class MessagesController < ApplicationController
     private
 
     def message_params
-      params.require(:message).permit(:name, :description)
+      params.require(:message).permit(:name, :description, :department, :target_announce_date)
     end
 end
