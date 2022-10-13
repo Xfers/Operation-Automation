@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
       post "/messages" => "messages#create"
       patch "/messages/:id" => "messages#update"
-      delete "/messages/:id" => "messages#destory"
+      delete "/messages/:id" => "messages#destroy"
     end
   end
 end

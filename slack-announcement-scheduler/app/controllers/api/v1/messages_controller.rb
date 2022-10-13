@@ -28,15 +28,17 @@ class Api::V1::MessagesController < ApplicationController
     def update 
       @message = Message.find(params[:id])
       @message.update(message_params)
+      render json: {
+        data: @message
+      }
 
-      redirect_to action: :show, id: @message
     end
 
     def destroy
       @message = Message.find(params[:id])
       @message.destroy
+      render json: { message: "The announcement has been deleted"}, status: :ok
 
-      redirect_to action: :index
     end
 
 
