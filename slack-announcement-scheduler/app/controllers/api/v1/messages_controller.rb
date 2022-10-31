@@ -26,7 +26,7 @@ class Api::V1::MessagesController < ApplicationController
 
     def update 
       @message = Message.find(params[:id])
-      @message.update(message_params)
+      @message.update_attributes( approval: "Approved" )
       render json: {
         data: @message
       }
