@@ -12,8 +12,7 @@ class Api::V1::MessagesController < ApplicationController
       @message = Message.new(message_params)
       @message.save
 
-      client = Slack::Web::Client.new
-      client.chat_postMessage(channel: '#project-acw', text: @message.description, as_user: true)
+      SendMessageToSlackJob.set(wait_until: Time.parse(@message.target_announce_date.to_s)).perform_later(@message)
       render json: { message: "OK"}, status: :ok
 
     end
