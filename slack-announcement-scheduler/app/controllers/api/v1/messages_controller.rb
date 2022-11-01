@@ -11,10 +11,6 @@ class Api::V1::MessagesController < ApplicationController
     def create 
       @message = Message.new(message_params)
       @message.save
-
-      SendMessageToSlackJob.set(wait_until: Time.parse(@message.target_announce_date.to_s)).perform_later(@message)
-      render json: { message: "OK"}, status: :ok
-
     end
 
     def show
@@ -30,6 +26,8 @@ class Api::V1::MessagesController < ApplicationController
       render json: {
         data: @message
       }
+      SendMessageToSlackJob.set(wait_until: Time.parse(@message.target_announce_date.to_s)).perform_later(@message)
+      render json: { message: "OK"}, status: :ok
 
     end
 
