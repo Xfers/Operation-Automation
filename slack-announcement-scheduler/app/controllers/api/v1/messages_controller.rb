@@ -44,7 +44,7 @@ class Api::V1::MessagesController < ApplicationController
       @message = Message.find(params[:id])
       @message.approval = :rejected
       @message.save
-      reder json: { message: 'The announcement request has been rejected, please contact People Team' }, status: :ok
+      render json: { message: 'The announcement request has been rejected, please contact People Team' }, status: :ok
 
     end
 
