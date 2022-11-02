@@ -32,7 +32,7 @@ class Api::V1::MessagesController < ApplicationController
 
     def accept
       @message = Message.find(params[:id])
-      @message.status = :accepted
+      @message.approval = :approved
       @message.save
 
       SendMessageToSlackJob.set(wait_until: Time.parse(@message.target_announce_date.to_s)).perform_later(@message)
@@ -42,7 +42,7 @@ class Api::V1::MessagesController < ApplicationController
 
     def reject
       @message = Message.find(params[:id])
-      @message.status = :rejected
+      @message.approval = :rejected
       @message.save
       reder json: { message: 'The announcement request has been rejected, please contact People Team' }, status: :ok
 
@@ -60,6 +60,6 @@ class Api::V1::MessagesController < ApplicationController
     private
 
     def message_params
-      params.require(:message).permit(:name, :description, :department, :target_announce_date, :approval, :target_announce_time)
+      params.require(:message).permit(:name, :description, :department, :target_announce_date)
     end
 end
