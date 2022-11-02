@@ -60,6 +60,6 @@ class Api::V1::MessagesController < ApplicationController
     private
 
     def message_params
-      params.require(:message).permit(:name, :description, :department, :target_announce_date)
+      params.require(:message).permit(:name, :description, :department, :target_announce_date, :approval, :target_announce_time)
     end
 end
