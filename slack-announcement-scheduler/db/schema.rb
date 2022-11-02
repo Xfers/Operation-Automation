@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_31_144126) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_02_114753) do
   create_table "announcements", force: :cascade do |t|
     t.text "title"
     t.text "content"
@@ -29,7 +29,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_31_144126) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "approval"
-    t.datetime "target_announce_time"
   end
 
   create_table "schedules", force: :cascade do |t|
