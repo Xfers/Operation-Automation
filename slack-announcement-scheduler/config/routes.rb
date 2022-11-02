@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
       post "/messages" => "messages#create"
       patch "/messages/:id" => "messages#update"
+      patch "/messages/:id/accept" => "messages#accept"
+      patch "/messages/:id/reject" => "messages#reject"
       delete "/messages/:id" => "messages#destroy"
     end
   end
