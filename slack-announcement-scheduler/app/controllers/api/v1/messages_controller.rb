@@ -25,7 +25,7 @@ class Api::V1::MessagesController < ApplicationController
       @message = Message.find(params[:id])
       @message.update(message_params)
       render json: {
-        data: @message
+        data: @message.reload
       }
 
     end
