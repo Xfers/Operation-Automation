@@ -3,6 +3,20 @@ class SendMessageToSlackJob < ApplicationJob
 
   def perform(message)
     client = Slack::Web::Client.new
-    client.chat_postMessage(channel: '#project-acw', text: message.description, as_user: true)
+    input = message.description.remove("\"")
+    result = ReverseMarkdown.convert input
+    binding.pry
+    client.chat_postMessage(channel: '#project-acw', 
+      as_user: true, 
+      mrkdwn: true,
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": result.gsub("**","*")
+          }
+        }
+      ])
   end
 end
