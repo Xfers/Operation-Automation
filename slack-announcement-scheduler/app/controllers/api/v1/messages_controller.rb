@@ -25,6 +25,7 @@ class Api::V1::MessagesController < ApplicationController
       @message = Message.find(params[:id])
       @message.update(message_params)
       #SendMessageToSlackJob.set(wait_until: Time.parse(@message.target_announce_date.to_s)).perform_later(@message)
+      #just in case I forgot 
       render json: {
         data: @message.reload
       }
