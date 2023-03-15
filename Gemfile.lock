@@ -257,6 +257,7 @@ DEPENDENCIES
   pry
   puma (~> 5.0)
   rails (~> 7.0.4)
+  railties
   reverse_markdown
   selenium-webdriver
   sidekiq
