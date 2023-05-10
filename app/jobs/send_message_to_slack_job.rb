@@ -5,7 +5,7 @@ class SendMessageToSlackJob < ApplicationJob
     client = Slack::Web::Client.new
     input = message.description.remove("\"")
     result = ReverseMarkdown.convert input.gsub(/<pre.*>/, "`").gsub("</pre>", "`")
-    client.chat_postMessage(channel: '#project-acw', 
+    client.chat_postMessage(channel: ENV['SLACK_CHANNEL'], 
       as_user: true, 
       mrkdwn: true,
       blocks: [
